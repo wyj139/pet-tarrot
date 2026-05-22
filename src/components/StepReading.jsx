@@ -9,7 +9,7 @@ export default function StepReading({candidates, drawnCard, orientations, readin
     if(startedRef.current) return
     startedRef.current = true
 
-    const apiKey = config.apiKey
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY
     if(!apiKey || apiKey === 'your_gemini_api_key_here'){
       setReading('缺少 Gemini API Key，请在 config.json 中设置 apiKey 字段。')
       return
