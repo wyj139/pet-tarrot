@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import config from '../../config.json'
+
 
 export default function StepReading({candidates, drawnCard, orientations, reading, setReading, onRestart, petName, petType, question}){
   const startedRef = useRef(false)
