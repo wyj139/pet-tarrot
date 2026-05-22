@@ -5,8 +5,11 @@ export default function StepReading({candidates, drawnCard, orientations, readin
   const startedRef = useRef(false)
 
   useEffect(()=>{
+    console.log('drawnCard:', drawnCard)        // 加这行
+    console.log('apiKey:', import.meta.env.VITE_GEMINI_API_KEY)  // 加这行
     if(!drawnCard) return
     if(startedRef.current) return
+
     startedRef.current = true
 
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY
