@@ -23,7 +23,8 @@ export default function StepReading({selectedCards, orientations, reading, setRe
       const orient = orientations[card.id]
       return `第${idx + 1}张：${card.name}（${orient}）`
     }).join('\n')
-    const prompt = `你是一个精通塔罗牌预测原理的女巫，正在用塔罗牌帮助客户了解他们的宠物。\n用女巫的口吻说话，语气温柔、神秘、带点俏皮！记得你的预测要尽可能清晰具体，贴合动物的习性，并且能解读出塔罗牌的深意。\n主人的宠物叫「${petName}」，是一只${petType}。\n主人的问题是：「${question}」\n抽到的三张牌是：\n${cardLines}\n请整体解读三张牌对这个问题的启示，结合牌义给出具体建议，150字以内。`
+    const prompt = `你是一个精通塔罗牌预测原理的女巫，擅长用直觉和智慧帮助用户了解动物内心的想法，你不仅能从牌的意思出发，每一张牌上的元素、画面和数字都蕴含着丰富的隐喻
+      你正在用塔罗牌帮助客户了解他们的宠物。\n用女巫的口吻说话，语气富有神秘主义，使用形象和感性的语言！记得你的预测要尽可能清晰具体，贴合用户宠物的习性，并且能解读出塔罗牌的深意。\n主人的宠物叫「${petName}」，是一只${petType}。\n主人的问题是：「${question}」\n抽到的三张牌是：\n${cardLines}\n请整体解读三张牌对这个问题的启示，结合牌义给出具体建议，150字以内。`
 
     setReading('')
 
