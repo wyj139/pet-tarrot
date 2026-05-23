@@ -1,26 +1,29 @@
 import React, { useEffect, useRef } from 'react'
-
-
-export default function StepReading({candidates, drawnCard, orientations, reading, setReading, onRestart, petName, petType, question}){
+export default function StepReading({selectedCards, orientations, reading, setReading, onRestart, petName, petType, question}){
   const startedRef = useRef(false)
+  const selectionKey = (selectedCards || []).map(card=>card.id).join(',')
 
   useEffect(()=>{
-    console.log('drawnCard:', drawnCard)        // 加这行
-    console.log('apiKey:', import.meta.env.VITE_GEMINI_API_KEY)  // 加这行
-    if(!drawnCard) return
+    startedRef.current = false
+  },[selectionKey])
+
+  useEffect(()=>{
+    if(!selectedCards || selectedCards.length !== 3) return
     if(startedRef.current) return
 
     startedRef.current = true
 
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY
     if(!apiKey || apiKey === 'your_gemini_api_key_here'){
-      setReading('缺少 Gemini API Key，请在 config.json 中设置 apiKey 字段。')
+      setReading('缺少 Gemini API Key，请在 .env 中设置 VITE_GEMINI_API_KEY。')
       return
     }
 
-    const cardName = drawnCard.name
-    const orientation = orientations[drawnCard.id]
-    const prompt = `你是一只拥有神秘预知能力的古老猫咪，正在用塔罗牌为主人指引方向。\n用宠物的口吻说话，语气温柔、神秘、带点俏皮，偶尔用"喵～"或"汪！"开头。\n主人的宠物叫「${petName}」，是一只${petType}。\n主人的问题是：「${question}」\n抽到的牌是：${cardName}（${orientation}）\n请解读这张牌对这个问题的启示，结合牌义给出具体建议，150字以内。`
+    const cardLines = selectedCards.map((card, idx)=>{
+      const orient = orientations[card.id]
+      return `第${idx + 1}张：${card.name}（${orient}）`
+    }).join('\n')
+    const prompt = `你是一只拥有神秘预知能力的古老猫咪，正在用塔罗牌为主人指引方向。\n用宠物的口吻说话，语气温柔、神秘、带点俏皮，偶尔用"喵～"或"汪！"开头。\n主人的宠物叫「${petName}」，是一只${petType}。\n主人的问题是：「${question}」\n抽到的三张牌是：\n${cardLines}\n请整体解读三张牌对这个问题的启示，结合牌义给出具体建议，150字以内。`
 
     setReading('')
 
@@ -67,7 +70,7 @@ export default function StepReading({candidates, drawnCard, orientations, readin
       setReading('调用 Gemini API 出错：' + (err.message||err))
     })
 
-  },[drawnCard])
+  },[selectionKey])
 
   return (
     <div>
@@ -76,14 +79,13 @@ export default function StepReading({candidates, drawnCard, orientations, readin
         <div className="left">
           <h3>抽到的牌</h3>
           <div className="cards">
-            {candidates.map(c=>{
-              const isChosen = drawnCard && c.id === drawnCard.id
+            {selectedCards.map(c=>{
               return (
                 <div key={c.id} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6}}>
                   <div style={{width:96,height:140,background:'#151224',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center'}}>
                     <div style={{textAlign:'center'}}>
-                      <div style={{fontSize:13,color: isChosen? 'var(--accent)':'#ccc'}}>{c.name}</div>
-                      {isChosen && <div style={{fontSize:12,color:'var(--accent)'}}>{orientations[c.id]}</div>}
+                      <div style={{fontSize:13,color:'var(--accent)'}}>{c.name}</div>
+                      <div style={{fontSize:12,color:'var(--accent)'}}>{orientations[c.id]}</div>
                     </div>
                   </div>
                 </div>

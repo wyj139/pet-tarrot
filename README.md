@@ -10,12 +10,10 @@
 npm install
 ```
 
-2. 在项目根目录编辑 `config.json` 文件，添加你的 Gemini API Key：
+2. 在根目录创建 `.env` 文件，添加：
 
-```json
-{
-  "apiKey": "your_actual_gemini_api_key_here"
-}
+```
+VITE_GEMINI_API_KEY=your_api_key_here
 ```
 
 3. 本地开发：
@@ -25,5 +23,5 @@ npm run dev
 ```
 
 说明：
-- Gemini API Key 通过 `config.json` 文件配置，免费额度可参考 [Google AI Studio](https://ai.google.dev/)。
+- Gemini API 调用使用 `VITE_GEMINI_API_KEY` 环境变量，免费额度可参考 [Google AI Studio](https://ai.google.dev/)。
 - Demo 仅包含 22 张大阿尔卡那样例数据，完整版需补充56张小阿尔卡那。

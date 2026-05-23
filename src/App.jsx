@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import StepWelcome from './components/StepWelcome'
 import StepQuestion from './components/StepQuestion'
 import StepDraw from './components/StepDraw'
@@ -19,10 +19,9 @@ export default function App(){
   const [petName,setPetName] = useState('')
   const [petType,setPetType] = useState('猫')
   const [question,setQuestion] = useState('')
-  const [candidates,setCandidates] = useState([]) // 五张候选
-  const [pickedId,setPickedId] = useState(null)
+  const [candidates,setCandidates] = useState([])
+  const [pickedIds,setPickedIds] = useState([])
   const [orientations,setOrientations] = useState({})
-  const [drawnCard,setDrawnCard] = useState(null)
   const [reading,setReading] = useState('')
 
   function handleStart(){
@@ -30,26 +29,30 @@ export default function App(){
   }
 
   function handleShuffle(){
-    const five = sampleShuffle(tarotCards,5)
+    const shuffled = sampleShuffle(tarotCards, tarotCards.length)
     const orients = {}
-    five.forEach(c=>{ orients[c.id] = Math.random() < 0.5 ? '正位' : '逆位' })
-    setCandidates(five)
+    shuffled.forEach(c=>{ orients[c.id] = Math.random() < 0.5 ? '正位' : '逆位' })
+    setCandidates(shuffled)
     setOrientations(orients)
-    setPickedId(null)
-    setDrawnCard(null)
+    setPickedIds([])
     setStep(3)
   }
 
   function handlePick(card){
-    setPickedId(card.id)
-    setDrawnCard(card)
+    setPickedIds(prev=>{
+      if(prev.includes(card.id) || prev.length >= 3) return prev
+      return [...prev, card.id]
+    })
   }
 
-  function handleToReading(){
-    if(!drawnCard) return
-    setReading('')
-    setStep(4)
-  }
+  useEffect(()=>{
+    if(pickedIds.length !== 3) return
+    const timer = setTimeout(()=>{
+      setReading('')
+      setStep(4)
+    }, 300)
+    return ()=>clearTimeout(timer)
+  },[pickedIds])
 
   function handleRestart(){
     setStep(1)
@@ -57,11 +60,16 @@ export default function App(){
     setPetType('猫')
     setQuestion('')
     setCandidates([])
-    setPickedId(null)
+    setPickedIds([])
     setOrientations({})
-    setDrawnCard(null)
     setReading('')
   }
+
+  const selectedCards = useMemo(() => {
+    return pickedIds
+      .map(id=>candidates.find(c=>c.id === id))
+      .filter(Boolean)
+  }, [pickedIds, candidates])
 
   return (
     <div className="app">
@@ -81,18 +89,17 @@ export default function App(){
           </div>
 
           <div className={"step " + (step===3? 'visible':'hidden')}>
-            <StepDraw candidates={candidates} onPick={(c)=>handlePick(c)} pickedId={pickedId} orientations={orientations} />
+            <StepDraw candidates={candidates} onPick={(c)=>handlePick(c)} pickedIds={pickedIds} orientations={orientations} />
             <div style={{display:'flex',justifyContent:'space-between',marginTop:12}}>
               <button className="btn ghost" onClick={()=>setStep(2)}>上一步</button>
               <div>
                 <button className="btn ghost" onClick={handleShuffle} style={{marginRight:8}}>重新洗牌</button>
-                <button className="btn" onClick={handleToReading} disabled={!drawnCard}>解读</button>
               </div>
             </div>
           </div>
 
           <div className={"step " + (step===4? 'visible':'hidden')}>
-            <StepReading candidates={candidates} drawnCard={drawnCard} orientations={orientations} reading={reading} setReading={setReading} onRestart={handleRestart} petName={petName} petType={petType} question={question} />
+            <StepReading selectedCards={selectedCards} orientations={orientations} reading={reading} setReading={setReading} onRestart={handleRestart} petName={petName} petType={petType} question={question} />
           </div>
         </div>
 
