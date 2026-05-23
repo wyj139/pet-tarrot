@@ -1,5 +1,6 @@
-// 仅包含22张大阿尔卡那作为 Demo 数据（完整版需补充56张小阿尔卡那）
+// 完整 78 张塔罗牌（22 张大阿尔卡那 + 56 张小阿尔卡那）
 const tarotCards = [
+  // 大阿尔卡那 0-21
   { id: 0, name: '愚者', keywords: ['新开始', '冒险', '自由'], reversedKeywords: ['鲁莽', '犹豫', '不成熟'] },
   { id: 1, name: '魔术师', keywords: ['创造力', '沟通', '行动'], reversedKeywords: ['操控', '欺骗', '错失良机'] },
   { id: 2, name: '女祭司', keywords: ['直觉', '秘密', '沉思'], reversedKeywords: ['隐瞒', '心不在焉', '直觉受阻'] },
@@ -21,7 +22,71 @@ const tarotCards = [
   { id: 18, name: '月亮', keywords: ['潜意识', '幻象', '直觉'], reversedKeywords: ['错觉', '恐惧', '迷惑'] },
   { id: 19, name: '太阳', keywords: ['喜悦', '成功', '活力'], reversedKeywords: ['短暂快乐', '延迟成功', '虚荣'] },
   { id: 20, name: '审判', keywords: ['觉醒', '复兴', '审视'], reversedKeywords: ['躲避审判', '延误', '后悔'] },
-  { id: 21, name: '世界', keywords: ['完成', '圆满', '成就'], reversedKeywords: ['未完成', '停滞', '未整合'] }
+  { id: 21, name: '世界', keywords: ['完成', '圆满', '成就'], reversedKeywords: ['未完成', '停滞', '未整合'] },
+
+  // 小阿尔卡那 - 权杖 22-35
+  { id: 22, name: '权杖一', keywords: ['灵感', '起点', '行动'], reversedKeywords: ['延迟', '疲惫', '阻滞'] },
+  { id: 23, name: '权杖二', keywords: ['规划', '选择', '远景'], reversedKeywords: ['犹豫', '保守', '退缩'] },
+  { id: 24, name: '权杖三', keywords: ['扩展', '合作', '期待'], reversedKeywords: ['挫折', '延误', '分歧'] },
+  { id: 25, name: '权杖四', keywords: ['庆祝', '稳定', '归属'], reversedKeywords: ['不稳', '疏离', '冲突'] },
+  { id: 26, name: '权杖五', keywords: ['竞争', '冲突', '磨合'], reversedKeywords: ['内耗', '回避', '妥协'] },
+  { id: 27, name: '权杖六', keywords: ['胜利', '认可', '信心'], reversedKeywords: ['自负', '失败', '受挫'] },
+  { id: 28, name: '权杖七', keywords: ['防守', '坚持', '抗压'], reversedKeywords: ['动摇', '放弃', '被压制'] },
+  { id: 29, name: '权杖八', keywords: ['速度', '进展', '消息'], reversedKeywords: ['停滞', '混乱', '迟缓'] },
+  { id: 30, name: '权杖九', keywords: ['韧性', '警惕', '坚持'], reversedKeywords: ['疲惫', '防御过度', '脆弱'] },
+  { id: 31, name: '权杖十', keywords: ['负担', '责任', '压力'], reversedKeywords: ['卸载', '逃避', '崩溃'] },
+  { id: 32, name: '权杖侍从', keywords: ['探索', '好奇', '热情'], reversedKeywords: ['冲动', '不成熟', '空想'] },
+  { id: 33, name: '权杖骑士', keywords: ['行动力', '冒险', '冲锋'], reversedKeywords: ['鲁莽', '冲突', '失控'] },
+  { id: 34, name: '权杖王后', keywords: ['自信', '魅力', '独立'], reversedKeywords: ['急躁', '控制', '冷漠'] },
+  { id: 35, name: '权杖国王', keywords: ['领导', '远见', '果断'], reversedKeywords: ['专断', '固执', '冲动'] },
+
+  // 小阿尔卡那 - 圣杯 36-49
+  { id: 36, name: '圣杯一', keywords: ['情感', '开启', '滋养'], reversedKeywords: ['封闭', '空虚', '不安'] },
+  { id: 37, name: '圣杯二', keywords: ['关系', '合作', '连结'], reversedKeywords: ['失衡', '误解', '疏离'] },
+  { id: 38, name: '圣杯三', keywords: ['友谊', '庆祝', '分享'], reversedKeywords: ['过度', '排斥', '流言'] },
+  { id: 39, name: '圣杯四', keywords: ['倦怠', '沉思', '停滞'], reversedKeywords: ['觉醒', '接受', '机遇'] },
+  { id: 40, name: '圣杯五', keywords: ['失落', '遗憾', '疗愈'], reversedKeywords: ['释怀', '希望', '转机'] },
+  { id: 41, name: '圣杯六', keywords: ['回忆', '温柔', '善意'], reversedKeywords: ['沉溺', '幼稚', '停留'] },
+  { id: 42, name: '圣杯七', keywords: ['选择', '幻想', '诱惑'], reversedKeywords: ['清醒', '决定', '专注'] },
+  { id: 43, name: '圣杯八', keywords: ['放下', '离开', '探索'], reversedKeywords: ['犹豫', '依恋', '回头'] },
+  { id: 44, name: '圣杯九', keywords: ['满足', '愿望', '享受'], reversedKeywords: ['空虚', '过度', '失衡'] },
+  { id: 45, name: '圣杯十', keywords: ['圆满', '家庭', '幸福'], reversedKeywords: ['裂痕', '失衡', '压力'] },
+  { id: 46, name: '圣杯侍从', keywords: ['温柔', '直觉', '好奇'], reversedKeywords: ['逃避', '情绪化', '不安'] },
+  { id: 47, name: '圣杯骑士', keywords: ['浪漫', '行动', '邀请'], reversedKeywords: ['拖延', '多情', '不稳'] },
+  { id: 48, name: '圣杯王后', keywords: ['关怀', '共情', '包容'], reversedKeywords: ['敏感', '依赖', '情绪化'] },
+  { id: 49, name: '圣杯国王', keywords: ['成熟', '平衡', '慈悲'], reversedKeywords: ['冷漠', '控制', '失衡'] },
+
+  // 小阿尔卡那 - 宝剑 50-63
+  { id: 50, name: '宝剑一', keywords: ['真相', '决断', '清晰'], reversedKeywords: ['混乱', '误判', '阻滞'] },
+  { id: 51, name: '宝剑二', keywords: ['僵持', '选择', '防御'], reversedKeywords: ['动摇', '不安', '揭露'] },
+  { id: 52, name: '宝剑三', keywords: ['心痛', '分离', '现实'], reversedKeywords: ['修复', '释怀', '疗愈'] },
+  { id: 53, name: '宝剑四', keywords: ['休整', '沉寂', '恢复'], reversedKeywords: ['焦虑', '过劳', '不安'] },
+  { id: 54, name: '宝剑五', keywords: ['冲突', '代价', '争执'], reversedKeywords: ['和解', '反思', '放手'] },
+  { id: 55, name: '宝剑六', keywords: ['过渡', '疗愈', '前行'], reversedKeywords: ['停滞', '纠结', '回头'] },
+  { id: 56, name: '宝剑七', keywords: ['策略', '隐秘', '试探'], reversedKeywords: ['暴露', '诚实', '失策'] },
+  { id: 57, name: '宝剑八', keywords: ['束缚', '无力', '恐惧'], reversedKeywords: ['解脱', '醒悟', '行动'] },
+  { id: 58, name: '宝剑九', keywords: ['焦虑', '噩梦', '担忧'], reversedKeywords: ['缓解', '希望', '释放'] },
+  { id: 59, name: '宝剑十', keywords: ['结束', '痛苦', '重生'], reversedKeywords: ['复原', '重建', '痊愈'] },
+  { id: 60, name: '宝剑侍从', keywords: ['警觉', '学习', '沟通'], reversedKeywords: ['冲动', '失言', '混乱'] },
+  { id: 61, name: '宝剑骑士', keywords: ['果断', '行动', '冲刺'], reversedKeywords: ['急躁', '鲁莽', '偏执'] },
+  { id: 62, name: '宝剑王后', keywords: ['理性', '独立', '清明'], reversedKeywords: ['冷硬', '刻薄', '偏见'] },
+  { id: 63, name: '宝剑国王', keywords: ['权威', '逻辑', '公正'], reversedKeywords: ['专断', '冷酷', '偏激'] },
+
+  // 小阿尔卡那 - 星币 64-77
+  { id: 64, name: '星币一', keywords: ['机会', '稳固', '资源'], reversedKeywords: ['失机', '短缺', '不稳'] },
+  { id: 65, name: '星币二', keywords: ['平衡', '灵活', '管理'], reversedKeywords: ['混乱', '失衡', '焦虑'] },
+  { id: 66, name: '星币三', keywords: ['合作', '技能', '进展'], reversedKeywords: ['失误', '分歧', '停滞'] },
+  { id: 67, name: '星币四', keywords: ['保守', '守护', '稳定'], reversedKeywords: ['吝啬', '僵化', '不安'] },
+  { id: 68, name: '星币五', keywords: ['困境', '贫乏', '挑战'], reversedKeywords: ['复苏', '援助', '希望'] },
+  { id: 69, name: '星币六', keywords: ['给予', '平衡', '分享'], reversedKeywords: ['不公', '索取', '失衡'] },
+  { id: 70, name: '星币七', keywords: ['耐心', '评估', '等待'], reversedKeywords: ['急躁', '焦虑', '失衡'] },
+  { id: 71, name: '星币八', keywords: ['专注', '学习', '积累'], reversedKeywords: ['倦怠', '敷衍', '停滞'] },
+  { id: 72, name: '星币九', keywords: ['收获', '独立', '自足'], reversedKeywords: ['依赖', '虚荣', '失衡'] },
+  { id: 73, name: '星币十', keywords: ['家族', '财富', '稳定'], reversedKeywords: ['争执', '破裂', '不稳'] },
+  { id: 74, name: '星币侍从', keywords: ['机会', '学习', '踏实'], reversedKeywords: ['懒散', '拖延', '不专注'] },
+  { id: 75, name: '星币骑士', keywords: ['勤勉', '可靠', '稳健'], reversedKeywords: ['顽固', '缓慢', '保守'] },
+  { id: 76, name: '星币王后', keywords: ['滋养', '务实', '安全'], reversedKeywords: ['占有', '焦虑', '不安'] },
+  { id: 77, name: '星币国王', keywords: ['富足', '稳重', '掌控'], reversedKeywords: ['贪婪', '保守', '僵化'] }
 ]
 
 export default tarotCards
